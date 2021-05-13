@@ -159,7 +159,7 @@ namespace CrocoKit_Sensor {
         //send pulse
         pins.setPull(Trig, PinPullMode.PullNone);
         pins.digitalWritePin(Trig, 0);
-        control.waitMicros(2);
+        control.waitMicros(4);
         pins.digitalWritePin(Trig, 1);
         control.waitMicros(10);
         pins.digitalWritePin(Trig, 0);
@@ -168,6 +168,84 @@ namespace CrocoKit_Sensor {
         const d = pins.pulseIn(Echo, PulseValue.High, 500 * 58);   
 
         return Math.idiv(d, 58);
+    }
+
+    //% blockId=CrocoKit_Sensor_V2RGBUL block="microbit|V2|RGB|Ultrasonic|Echo %Echo"
+    //% color="#228B22"
+    //% weight=97
+    //% blockGap=20
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=5
+    export function V2RGBUL(Echo: DigitalPin): number {
+		let up = 0
+		let ultime = 0
+        //send pulse
+		pins.digitalWritePin(Echo, 0)
+		basic.pause(100)
+		pins.digitalWritePin(Echo, 1)
+		control.waitMicros(23)
+		pins.digitalWritePin(Echo, 0)
+
+        //read pulse, maximum distance=500cm
+		while (pins.digitalReadPin(Echo) == 0) {
+			if (ultime > 29000) {
+				break;
+			}
+			ultime += 1
+		}
+		ultime = 0
+		while (pins.digitalReadPin(Echo) == 1) {
+			up += 1
+		}
+		while (pins.digitalReadPin(Echo) == 0) {
+			if (ultime > 29000) {
+				break;
+			}
+			ultime += 1
+		}
+		ultime = 0
+		while (pins.digitalReadPin(Echo) == 1) {
+			up += 1
+		}
+        return Math.round(up / 19);
+    }
+
+    //% blockId=CrocoKit_Sensor_V1RGBUL block="microbit|V1|RGB|Ultrasonic|Echo %Echo"
+    //% color="#228B22"
+    //% weight=97
+    //% blockGap=20
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=5
+    export function V1RGBUL(Echo: DigitalPin): number {
+		let up = 0
+		let ultime = 0
+        //send pulse
+		pins.digitalWritePin(Echo, 0)
+		basic.pause(100)
+		pins.digitalWritePin(Echo, 1)
+		control.waitMicros(23)
+		pins.digitalWritePin(Echo, 0)
+
+        //read pulse, maximum distance=500cm
+		while (pins.digitalReadPin(Echo) == 0) {
+			if (ultime > 29000) {
+				break;
+			}
+			ultime += 1
+		}
+		ultime = 0
+		while (pins.digitalReadPin(Echo) == 1) {
+			up += 1
+		}
+		while (pins.digitalReadPin(Echo) == 0) {
+			if (ultime > 29000) {
+				break;
+			}
+			ultime += 1
+		}
+		ultime = 0
+		while (pins.digitalReadPin(Echo) == 1) {
+			up += 1
+		}
+        return Math.round(up / 6);
     }
 
 
