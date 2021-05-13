@@ -71,6 +71,8 @@
     "CrocoKit_Sensor.Vibration|block": "震動傳感器|引腳 %pin|震動時 ",
     "CrocoKit_Sensor.Hall|block": "霍爾傳感器|引腳 %pin|磁鐵靠近時",
     "CrocoKit_Sensor.Ultrasonic|block": "超聲波|發射引腳 %Trig|接收引腳 %Echo",
+    "CrocoKit_Sensor.V2RGBUL|block": "microbit|V2|超聲波|引腳 %Echo",
+    "CrocoKit_Sensor.V1RGBUL|block": "microbit|V1|超聲波|引腳 %Echo",
     "CrocoKit_Sensor.GetRGBValue|block": "颜色傳感器|返回 %value",
     "CrocoKit_Sensor.enGetRGB.GetValueR|block": "R值",
     "CrocoKit_Sensor.enGetRGB.GetValueG|block": "G值",
